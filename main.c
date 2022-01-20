@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
+/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:56:39 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/19 10:22:32 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:11:31 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	start(int fd, t_mlx ptr, int tai, int y);
 
 int	receptext(int key, void *param)
 {
@@ -38,7 +40,7 @@ int	main(int argc, char **argv)
 		exit(10);
 	}
 	ptr.mlx_ptr = mlx_init();
-	ptr.mlx_win = mlx_new_window(ptr.mlx_ptr, 1500, 1300, "mlx test410");
+	ptr.mlx_win = mlx_new_window(ptr.mlx_ptr, 2200, 1300, "mlx test410");
 	mlx_key_hook(ptr.mlx_win, receptext, (void *)0);
 	start(ret, ptr, 0, 0);
 	mlx_loop(ptr.mlx_ptr);

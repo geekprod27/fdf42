@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
+/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1001/01/11 07:00:00 by  by nfelsem       #+#    #+#             */
-/*   Updated: 2022/01/19 10:44:40 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:12:36 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	*getint(char *line)
 	while (*line != '\n' && *line)
 	{
 		tab[i] = ft_atoi(line);
+		line++;
 		i++;
 		while (ft_isdigit(*line) && *line)
 			line++;
@@ -57,7 +58,7 @@ int	*getint(char *line)
 			while (*line != ' ' && *line)
 				line++;
 		}
-		while (!ft_isdigit(*line) && *line)
+		while ((!ft_isdigit(*line) && *line != '-') && *line)
 			line++;
 	}
 	tab[i] = 10585510;
@@ -92,10 +93,10 @@ void	start(int fd, t_mlx ptr, int tai, int y)
 	int		*tab;
 
 	line = get_next_line(fd);
-	tai = 500 / (comppoint(line));
+	tai = 1000 / (comppoint(line));
 	if (tai == 1)
 		tai = 2;
-	x = 500;
+	x = 1100;
 	y = 50;
 	i = 0;
 	tab = getint(line);
