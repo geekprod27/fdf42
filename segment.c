@@ -6,17 +6,17 @@
 /*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 13:00:44 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/17 08:35:24 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:41:47 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
+void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 {
-	int dx;
-	int dy;
-	int e;
+	int	dx;
+	int	dy;
+	int	e;
 
 	dx = x2 - x1;
 	dy = y2 - y1;
@@ -24,21 +24,21 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 	{
 		if (dx > 0)
 		{
-			if(dy != 0)
+			if (dy != 0)
 			{
-				if(dy > 0)
+				if (dy > 0)
 				{
-					if(dx >= dy)
+					if (dx >= dy)
 					{
 						e = dx;
 						dx = e * 2;
 						dy = dy * 2;
 						while (1)
 						{
-							mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 							x1 = x1 + 1;
-							if(x1 == x2)
-								break;
+							if (x1 == x2)
+								break ;
 							e = e - dy;
 							if (e < 0)
 							{
@@ -54,10 +54,10 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 							y1 = y1 + 1;
 							if (y1 == y2)
-								break;
+								break ;
 							e = e - dx;
 							if (e < 0)
 							{
@@ -69,38 +69,38 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 				}
 				else
 				{
-					if(dx >= -dy)
+					if (dx >= -dy)
 					{
 						e = dx;
 						dx = e * 2;
 						dy = dy * 2;
 						while (1)
 						{
-							mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 							x1 = x1 + 1;
 							if (x1 == x2)
-								break;
+								break ;
 							e = e + dy;
 							if (e < 0)
 							{
 								y1 = y1 - 1;
 								e = e + dx;
-							} 
+							}
 						}
 					}
 					else
 					{
 						e = dy;
-						dy = e *2;
+						dy = e * 2;
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 							y1 = y1 - 1;
 							if (y1 == y2)
-								break;
+								break ;
 							e = e + dx;
-							if(e > 0)
+							if (e > 0)
 							{
 								x1 = x1 + 1;
 								e = e + dy;
@@ -111,32 +111,32 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 			}
 			else
 			{
-				while(x1 != x2)
+				while (x1 != x2)
 				{
-					mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 					x1 = x1 + 1;
 				}
 			}
 		}
 		else
 		{
-			if(dy != 0)
+			if (dy != 0)
 			{
-				if(dy > 0)
+				if (dy > 0)
 				{
-					if(-dx >= dy)
+					if (-dx >= dy)
 					{
 						e = dx;
 						dx = dx * 2;
 						dy = dy * 2;
 						while (1)
 						{
-							mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 							x1 = x1 - 1;
 							if (x1 == x2)
-								break;
+								break ;
 							e = e + dy;
-							if(e >= 0)
+							if (e >= 0)
 							{
 								y1 = y1 + 1;
 								e = e + dx;
@@ -150,16 +150,16 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 							y1 = y1 + 1;
 							if (y1 == y2)
-								break;
+								break ;
 							e = e + dx;
 							if (e <= 0)
 							{
 								x1 = x1 - 1;
 								e = e + dy;
-							} 
+							}
 						}
 					}
 				}
@@ -172,10 +172,10 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 							x1 = x1 - 1;
 							if (x1 == x2)
-								break;
+								break ;
 							e = e - dy;
 							if (e >= 0)
 							{
@@ -191,10 +191,10 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 							y1 = y1 - 1;
 							if (y1 == y2)
-								break;
+								break ;
 							e = e - dx;
 							if (e >= 0)
 							{
@@ -207,9 +207,9 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 			}
 			else
 			{
-				while(x1 != x2)
+				while (x1 != x2)
 				{
-					mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 					x1 = x1 - 1;
 				}
 			}
@@ -218,25 +218,25 @@ void	segment(int x1, int y1, int x2, int y2, void *mlx_ptr, void *mlx_win)
 	else
 	{
 		dy = y2 - y1;
-		if(dy != 0)
+		if (dy != 0)
 		{
 			if (dy > 0)
 			{
-				while(y1 != y2)
+				while (y1 != y2)
 				{
-					mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 					y1 = y1 + 1;
 				}
 			}
 			else
 			{
-				while(y1 != y2)
+				while (y1 != y2)
 				{
-					mlx_pixel_put(mlx_ptr, mlx_win, x1, y1, 0xFFFFFF);
+					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
 					y1 = y1 - 1;
 				}
 			}
 		}
 	}
-	mlx_pixel_put(mlx_ptr, mlx_win, x2, y2, 0xFFFFFF);
+	mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x2, y2, 0xFFFFFF);
 }

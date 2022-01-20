@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wextra -Wall -Werror
 
-SRC = fdf.c gnl/get_next_line.c gnl/get_next_line_utils.c segment.c
+SRC = fdf.c gnl/get_next_line.c gnl/get_next_line_utils.c segment.c main.c
 
 OBJ = ${SRC:.c=.o} ${SRS:.c=.o}
 
