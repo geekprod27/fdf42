@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1001/01/11 07:00:00 by  by nfelsem       #+#    #+#             */
-/*   Updated: 2022/01/20 15:12:36 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/23 10:10:33 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	comppoint(char *str)
 		else
 			i++;
 	}
-	//ft_printf("%d\n", cont);
 	return (cont);
 }
 
@@ -84,51 +83,30 @@ int	*ft_intdup(int *tab)
 	return (ret);
 }
 
-void	start(int fd, t_mlx ptr, int tai, int y)
+void	start(int fd, t_mlx ptr, t_point p)
 {
-	char	*line;
-	int		i;
-	int		x;
-	int		*tab2;
+	char	*linne;
+	int		tai;
 	int		*tab;
 
-	line = get_next_line(fd);
-	tai = 1000 / (comppoint(line));
-	if (tai == 1)
+	p.t = ptr.taille;
+	linne = get_next_line(fd);
+	tai = (1000 / (comppoint(linne))) + ptr.taille;
+	if (tai <= 1)
 		tai = 2;
-	x = 1100;
-	y = 50;
-	i = 0;
-	tab = getint(line);
-	while (tab[i] != 10585510)
-	{
-		if (tab[i + 1] != 10585510)
-			seg(x, y - tab[i], x + tai, y + (tai / 2) - tab[i + 1], ptr);
-		x = x + tai;
-		y = y + (tai / 2);
-		i++;
-	}
-	free(line);
-	line = get_next_line(fd);
-	while (line)
-	{
-		tab2 = ft_intdup(tab);
-		x = (x - (tai * comppoint(line))) - (tai);
-		y = (y - ((tai / 2) * comppoint(line))) + (tai / 2);
-		i = 0;
-		if (tab)
-			free(tab);
-		tab = getint(line);
-		while (tab[i] != 10585510)
-		{
-			if (tab[i + 1] != 10585510)
-				seg(x, y - tab[i], x + tai, y + (tai / 2) - tab[i + 1], ptr);
-			seg(x, y - tab[i], x + tai, y - (tai / 2) - tab2[i], ptr);
-			x = x + tai;
-			y = y + (tai / 2);
-			i++;
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
+	ptr.taille = tai;
+	p.t = tai;
+	tab = getint(linne);
+	p = firstline(tab, p, ptr);
+	line(linne, tab, p, ptr);
+	free(linne);
+	linne = get_next_line(fd);
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 10, ptr.color, "Zoom : z");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 20, ptr.color, "Dezoom : s");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 30, ptr.color,
+		"Deplacement : fleches directionnel");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 40, ptr.color,
+		"Changement de couleur : o / p");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 50, ptr.color,
+		"Quitter : Echap");
 }

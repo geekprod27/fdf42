@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wextra -Wall -Werror
 
-SRC = fdf.c gnl/get_next_line.c gnl/get_next_line_utils.c segment.c main.c
+SRC = fdf.c gnl/get_next_line.c gnl/get_next_line_utils.c segment.c main.c line.c depla.c color.c
 
 OBJ = ${SRC:.c=.o} ${SRS:.c=.o}
 
@@ -21,8 +21,8 @@ ${LIBPRINTF}:
 ${LIBFT}:
 	@make -C libft/
 
-${NAME}: ${LIBPRINTF} ${LIBFT} ${OBJ}
-	gcc -o ${NAME} ${OBJ} ${LIBPRINTF} ${LIBFT}  -lmlx -framework OpenGl -framework AppKit
+${NAME}: ${LIBMLX} ${LIBPRINTF} ${LIBFT} ${OBJ}
+	gcc -o ${NAME} ${OBJ} ${LIBMLX} ${LIBPRINTF} ${LIBFT}  -Lmlx_linux -lXext -lX11
 
 clean:
 	rm -f ${OBJ}

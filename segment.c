@@ -6,20 +6,20 @@
 /*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 13:00:44 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/18 17:41:47 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/22 17:24:03 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
+void	seg(t_point un, t_point de, t_mlx ptr)
 {
 	int	dx;
 	int	dy;
 	int	e;
 
-	dx = x2 - x1;
-	dy = y2 - y1;
+	dx = de.x - un.x;
+	dy = de.y - un.y;
 	if (dx != 0)
 	{
 		if (dx > 0)
@@ -35,14 +35,14 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 						dy = dy * 2;
 						while (1)
 						{
-							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-							x1 = x1 + 1;
-							if (x1 == x2)
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+							un.x = un.x + 1;
+							if (un.x == de.x)
 								break ;
 							e = e - dy;
 							if (e < 0)
 							{
-								y1 = y1 + 1;
+								un.y = un.y + 1;
 								e = e + dx;
 							}
 						}
@@ -54,14 +54,14 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-							y1 = y1 + 1;
-							if (y1 == y2)
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+							un.y = un.y + 1;
+							if (un.y == de.y)
 								break ;
 							e = e - dx;
 							if (e < 0)
 							{
-								x1 = x1 + 1;
+								un.x = un.x + 1;
 								e = e + dy;
 							}
 						}
@@ -76,14 +76,14 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 						dy = dy * 2;
 						while (1)
 						{
-							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-							x1 = x1 + 1;
-							if (x1 == x2)
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+							un.x = un.x + 1;
+							if (un.x == de.x)
 								break ;
 							e = e + dy;
 							if (e < 0)
 							{
-								y1 = y1 - 1;
+								un.y = un.y - 1;
 								e = e + dx;
 							}
 						}
@@ -95,14 +95,14 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-							y1 = y1 - 1;
-							if (y1 == y2)
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+							un.y = un.y - 1;
+							if (un.y == de.y)
 								break ;
 							e = e + dx;
 							if (e > 0)
 							{
-								x1 = x1 + 1;
+								un.x = un.x + 1;
 								e = e + dy;
 							}
 						}
@@ -111,10 +111,10 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 			}
 			else
 			{
-				while (x1 != x2)
+				while (un.x != de.x)
 				{
-					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-					x1 = x1 + 1;
+					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+					un.x = un.x + 1;
 				}
 			}
 		}
@@ -131,14 +131,14 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 						dy = dy * 2;
 						while (1)
 						{
-							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-							x1 = x1 - 1;
-							if (x1 == x2)
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+							un.x = un.x - 1;
+							if (un.x == de.x)
 								break ;
 							e = e + dy;
 							if (e >= 0)
 							{
-								y1 = y1 + 1;
+								un.y = un.y + 1;
 								e = e + dx;
 							}
 						}
@@ -150,14 +150,14 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-							y1 = y1 + 1;
-							if (y1 == y2)
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+							un.y = un.y + 1;
+							if (un.y == de.y)
 								break ;
 							e = e + dx;
 							if (e <= 0)
 							{
-								x1 = x1 - 1;
+								un.x = un.x - 1;
 								e = e + dy;
 							}
 						}
@@ -172,14 +172,14 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-							x1 = x1 - 1;
-							if (x1 == x2)
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+							un.x = un.x - 1;
+							if (un.x == de.x)
 								break ;
 							e = e - dy;
 							if (e >= 0)
 							{
-								y1 = y1 - 1;
+								un.y = un.y - 1;
 								e = e + dx;
 							}
 						}
@@ -191,14 +191,14 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 						dx = dx * 2;
 						while (1)
 						{
-							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-							y1 = y1 - 1;
-							if (y1 == y2)
+							mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+							un.y = un.y - 1;
+							if (un.y == de.y)
 								break ;
 							e = e - dx;
 							if (e >= 0)
 							{
-								x1 = x1 - 1;
+								un.x = un.x - 1;
 								e = e + dy;
 							}
 						}
@@ -207,36 +207,36 @@ void	seg(int x1, int y1, int x2, int y2, t_mlx ptr)
 			}
 			else
 			{
-				while (x1 != x2)
+				while (un.x != de.x)
 				{
-					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-					x1 = x1 - 1;
+					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+					un.x = un.x - 1;
 				}
 			}
 		}
 	}
 	else
 	{
-		dy = y2 - y1;
+		dy = de.y - un.y;
 		if (dy != 0)
 		{
 			if (dy > 0)
 			{
-				while (y1 != y2)
+				while (un.y != de.y)
 				{
-					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-					y1 = y1 + 1;
+					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+					un.y = un.y + 1;
 				}
 			}
 			else
 			{
-				while (y1 != y2)
+				while (un.y != de.y)
 				{
-					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x1, y1, 0xFFFFFF);
-					y1 = y1 - 1;
+					mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, un.x, un.y, ptr.color);
+					un.y = un.y - 1;
 				}
 			}
 		}
 	}
-	mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, x2, y2, 0xFFFFFF);
+	mlx_pixel_put(ptr.mlx_ptr, ptr.mlx_win, de.x, de.y, ptr.color);
 }
