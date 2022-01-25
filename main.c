@@ -3,22 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
+/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:56:39 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/22 17:39:17 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:00:14 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	zoom(t_point p, t_mlx *ptr)
+int	recepsou(int key, int x, int y, void *param)
 {
-	mlx_clear_window(ptr->mlx_ptr, ptr->mlx_win);
-	ptr->taille = ptr->taille + 2;
-	close(ptr->fd);
-	ptr->fd = open(ptr->file, O_RDONLY);
-	start(ptr->fd, *ptr, p);
+	t_mlx	*ptr;
+	t_point	p;
+
+	if (key == M_CLK_L)
+	{
+		ptr = (t_mlx *) param;
+		mlx_clear_window(ptr->mlx_ptr, ptr->mlx_win);
+		ptr->x = x;
+		ptr->y = y;
+		p.x = ptr->x;
+		p.y = ptr->y;
+		close(ptr->fd);
+		ptr->fd = open(ptr->file, O_RDONLY);
+		start(ptr->fd, *ptr, p);
+	}
+	return (0);
 }
 
 int	receptext(int key, void *param)
@@ -29,26 +40,30 @@ int	receptext(int key, void *param)
 	ptr = (t_mlx *) param;
 	p.x = ptr->x;
 	p.y = ptr->y;
-	if (key == 65307)
+	if (key == K_ESC)
 		exit(3);
-	else if (key == 65362)
+	else if (key == K_AR_U)
 		haut(p, ptr);
-	else if (key == 65364)
+	else if (key == K_AR_D)
 		bas(p, ptr);
-	else if (key == 65361)
+	else if (key == K_AR_L)
 		gauche(p, ptr);
-	else if (key == 65363)
+	else if (key == K_AR_R)
 		droite(p, ptr);
-	else if (key == 115)
+	else if (key == K_S)
 		dezoom(p, ptr);
-	else if (key == 122)
+	else if (key == K_Z)
 		zoom(p, ptr);
-	else if (key == 97)
+	else if (key == K_A)
 		mlx_clear_window(ptr->mlx_ptr, ptr->mlx_win);
-	else if (key == 111)
+	else if (key == K_O)
 		colorplus(p, ptr);
-	else if (key == 112)
+	else if (key == K_P)
 		colormoin(p, ptr);
+	else if (key == K_M)
+		mulmoin(p, ptr);
+	else if (key == K_K)
+		mulplus(p, ptr);
 	return (0);
 }
 
@@ -64,6 +79,7 @@ t_mlx	initptr(int ret, char *file)
 	ptr.taille = 0;
 	ptr.file = file;
 	ptr.color = 0xFFFFFF;
+	ptr.mul = 1;
 	return (ptr);
 }
 
@@ -91,6 +107,7 @@ int	main(int argc, char **argv)
 	ptr = initptr(ret, argv[1]);
 	la = &ptr;
 	mlx_key_hook(ptr.mlx_win, receptext, la);
+	mlx_mouse_hook(ptr.mlx_win, recepsou, la);
 	start(ret, ptr, p);
 	mlx_do_key_autorepeaton(ptr.mlx_ptr);
 	mlx_loop(ptr.mlx_ptr);

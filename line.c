@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
+/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:12:03 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/22 17:17:54 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:09:40 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ t_point	firstline(int *tab, t_point p, t_mlx t)
 	while (tab[i] != 10585510)
 	{
 		un.x = p.x;
-		un.y = p.y - tab[i];
+		un.y = p.y - (tab[i] * t.mul);
 		if (tab[i + 1] != 10585510)
 		{
 			de.x = p.x + p.t;
-			de.y = p.y + (p.t / 2) - tab[i + 1];
+			de.y = p.y + (p.t / 2) - (tab[i + 1] * t.mul);
 			if (un.x <= 1600 && un.x >= -100 && de.x <= 1600 && de.x >= -100
 				&& un.y <= 1400 && un.y >= -100 && de.y <= 1400 && de.y >= -100)
 				seg(un, de, t);
@@ -48,18 +48,20 @@ t_point	autreline(int *tab, t_point p, t_mlx t, int *tab2)
 	while (tab[i] != 10585510)
 	{
 		un.x = p.x;
-		un.y = p.y - tab[i];
+		un.y = p.y - (tab[i] * t.mul);
 		if (tab[i + 1] != 10585510)
 		{
 			de.x = p.x + p.t;
-			de.y = p.y + (p.t / 2) - tab[i + 1];
+			de.y = p.y + (p.t / 2) - (tab[i + 1] * t.mul);
 			if (un.x <= 1600 && un.x >= -100 && de.x <= 1600 && de.x >= -100
 				&& un.y <= 1400 && un.y >= -100 && de.y <= 1400 && de.y >= -100)
 				seg(un, de, t);
 		}
 		de.x = p.x + p.t;
-		de.y = p.y - (p.t / 2) - tab2[i];
-		seg(un, de, t);
+		de.y = p.y - (p.t / 2) - (tab2[i] * t.mul);
+		if (un.x <= 1600 && un.x >= -100 && de.x <= 1600 && de.x >= -100
+			&& un.y <= 1400 && un.y >= -100 && de.y <= 1400 && de.y >= -100)
+			seg(un, de, t);
 		p.x = p.x + p.t;
 		p.y = p.y + (p.t / 2);
 		i++;

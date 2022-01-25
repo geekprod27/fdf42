@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
+/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:05:23 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/22 17:30:49 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:41:23 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 
+# if defined(__APPLE__)
+#  include "key_macos.h"
+# else
+#  include "key_linux.h"
+# endif
+
 typedef struct s_mlx	t_mlx;
 struct s_mlx
 {
@@ -30,6 +36,7 @@ struct s_mlx
 	char	*file;
 	int		taille;
 	int		color;
+	int		mul;
 };
 
 typedef struct s_point	t_point;
@@ -55,5 +62,8 @@ void	droite(t_point p, t_mlx *ptr);
 void	dezoom(t_point p, t_mlx *ptr);
 void	colormoin(t_point p, t_mlx *ptr);
 void	colorplus(t_point p, t_mlx *ptr);
+void	zoom(t_point p, t_mlx *ptr);
+void	mulplus(t_point p, t_mlx *ptr);
+void	mulmoin(t_point p, t_mlx *ptr);
 
 #endif
