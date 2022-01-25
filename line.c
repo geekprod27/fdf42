@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:12:03 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/24 17:09:40 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/25 17:30:21 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ t_point	firstline(int *tab, t_point p, t_mlx t)
 	return (p);
 }
 
+int	horsecran(t_point un, t_point de)
+{
+	if (un.x <= 1600 && un.x >= -100 && de.x <= 1600 && de.x >= -100
+		&& un.y <= 1400 && un.y >= -100 && de.y <= 1400 && de.y >= -100)
+		return (1);
+	return (0);
+}
+
 t_point	autreline(int *tab, t_point p, t_mlx t, int *tab2)
 {
 	int		i;
@@ -53,14 +61,12 @@ t_point	autreline(int *tab, t_point p, t_mlx t, int *tab2)
 		{
 			de.x = p.x + p.t;
 			de.y = p.y + (p.t / 2) - (tab[i + 1] * t.mul);
-			if (un.x <= 1600 && un.x >= -100 && de.x <= 1600 && de.x >= -100
-				&& un.y <= 1400 && un.y >= -100 && de.y <= 1400 && de.y >= -100)
+			if (horsecran(un, de))
 				seg(un, de, t);
 		}
 		de.x = p.x + p.t;
 		de.y = p.y - (p.t / 2) - (tab2[i] * t.mul);
-		if (un.x <= 1600 && un.x >= -100 && de.x <= 1600 && de.x >= -100
-			&& un.y <= 1400 && un.y >= -100 && de.y <= 1400 && de.y >= -100)
+		if (horsecran(un, de))
 			seg(un, de, t);
 		p.x = p.x + p.t;
 		p.y = p.y + (p.t / 2);

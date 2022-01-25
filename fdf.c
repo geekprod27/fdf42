@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1001/01/11 07:00:00 by  by nfelsem       #+#    #+#             */
-/*   Updated: 2022/01/25 14:21:33 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/25 17:12:45 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,5 @@ void	start(int fd, t_mlx ptr, t_point p)
 	p = firstline(tab, p, ptr);
 	line(linne, tab, p, ptr);
 	free(linne);
-	linne = get_next_line(fd);
 	putcont(ptr);
 }
