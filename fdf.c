@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.frn>         +#+  +:+       +#+        */
+/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1001/01/11 07:00:00 by  by nfelsem       #+#    #+#             */
-/*   Updated: 2022/01/23 10:10:33 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:21:33 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,24 @@ int	*ft_intdup(int *tab)
 	return (ret);
 }
 
+void	putcont(t_mlx ptr)
+{
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 10, ptr.color, "Zoom : z");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 25, ptr.color, "Dezoom : s");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 40, ptr.color,
+		"Deplacement : fleches directionnel");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 55, ptr.color,
+		"Changement de couleur : o / p");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 70, ptr.color,
+		"Multiple hauteur des points : k / m");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 85, ptr.color,
+		"Delacer origine : clique gauche");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 100, ptr.color,
+		"Reset : r");
+	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 115, ptr.color,
+		"Quitter : Echap");
+}
+
 void	start(int fd, t_mlx ptr, t_point p)
 {
 	char	*linne;
@@ -101,12 +119,5 @@ void	start(int fd, t_mlx ptr, t_point p)
 	line(linne, tab, p, ptr);
 	free(linne);
 	linne = get_next_line(fd);
-	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 10, ptr.color, "Zoom : z");
-	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 20, ptr.color, "Dezoom : s");
-	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 30, ptr.color,
-		"Deplacement : fleches directionnel");
-	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 40, ptr.color,
-		"Changement de couleur : o / p");
-	mlx_string_put(ptr.mlx_ptr, ptr.mlx_win, 10, 50, ptr.color,
-		"Quitter : Echap");
+	putcont(ptr);
 }

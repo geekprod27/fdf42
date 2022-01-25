@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:56:39 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/24 17:00:14 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:15:52 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ int	recepsou(int key, int x, int y, void *param)
 		start(ptr->fd, *ptr, p);
 	}
 	return (0);
+}
+
+void	recpetext2(int key, t_mlx *ptr, t_point p)
+{
+	if (key == K_O)
+		colorplus(p, ptr);
+	else if (key == K_P)
+		colormoin(p, ptr);
+	else if (key == K_M)
+		mulmoin(p, ptr);
+	else if (key == K_K)
+		mulplus(p, ptr);
+	else if (key == K_R)
+		reset(p, ptr);
 }
 
 int	receptext(int key, void *param)
@@ -56,14 +70,8 @@ int	receptext(int key, void *param)
 		zoom(p, ptr);
 	else if (key == K_A)
 		mlx_clear_window(ptr->mlx_ptr, ptr->mlx_win);
-	else if (key == K_O)
-		colorplus(p, ptr);
-	else if (key == K_P)
-		colormoin(p, ptr);
-	else if (key == K_M)
-		mulmoin(p, ptr);
-	else if (key == K_K)
-		mulplus(p, ptr);
+	else
+		recpetext2(key, ptr, p);
 	return (0);
 }
 
@@ -109,6 +117,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(ptr.mlx_win, receptext, la);
 	mlx_mouse_hook(ptr.mlx_win, recepsou, la);
 	start(ret, ptr, p);
-	mlx_do_key_autorepeaton(ptr.mlx_ptr);
 	mlx_loop(ptr.mlx_ptr);
 }

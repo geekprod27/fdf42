@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:05:23 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/24 15:41:23 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:16:14 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	colorplus(t_point p, t_mlx *ptr);
 void	zoom(t_point p, t_mlx *ptr);
 void	mulplus(t_point p, t_mlx *ptr);
 void	mulmoin(t_point p, t_mlx *ptr);
+void	reset(t_point p, t_mlx *ptr);
 
 #endif

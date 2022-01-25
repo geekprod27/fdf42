@@ -21,8 +21,8 @@ ${LIBPRINTF}:
 ${LIBFT}:
 	@make -C libft/
 
-${NAME}: ${LIBPRINTF} ${LIBFT} ${OBJ}
-	gcc -o ${NAME} ${OBJ} ${LIBPRINTF} ${LIBFT}  -lmlx -framework OpenGl -framework AppKit
+${NAME}: ${LIBMLX} ${LIBPRINTF} ${LIBFT} ${OBJ}
+	gcc -o ${NAME} ${OBJ} ${LIBMLX} ${LIBPRINTF} ${LIBFT}  -Lmlx_linux -lXext -lX11
 
 clean:
 	rm -f ${OBJ}
