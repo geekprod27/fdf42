@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:56:39 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/01/25 14:15:52 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/01/26 13:34:38 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void	recpetext2(int key, t_mlx *ptr, t_point p)
 		mulplus(p, ptr);
 	else if (key == K_R)
 		reset(p, ptr);
+	else if (key == K_S)
+		dezoom(p, ptr);
+	else if (key == K_Z)
+		zoom(p, ptr);
 }
 
 int	receptext(int key, void *param)
@@ -55,7 +59,11 @@ int	receptext(int key, void *param)
 	p.x = ptr->x;
 	p.y = ptr->y;
 	if (key == K_ESC)
+	{
+		mlx_destroy_window(ptr->mlx_ptr, ptr->mlx_win);
+		free(ptr->mlx_ptr);
 		exit(3);
+	}
 	else if (key == K_AR_U)
 		haut(p, ptr);
 	else if (key == K_AR_D)
@@ -64,12 +72,6 @@ int	receptext(int key, void *param)
 		gauche(p, ptr);
 	else if (key == K_AR_R)
 		droite(p, ptr);
-	else if (key == K_S)
-		dezoom(p, ptr);
-	else if (key == K_Z)
-		zoom(p, ptr);
-	else if (key == K_A)
-		mlx_clear_window(ptr->mlx_ptr, ptr->mlx_win);
 	else
 		recpetext2(key, ptr, p);
 	return (0);
